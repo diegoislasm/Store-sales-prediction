@@ -30,19 +30,26 @@ This project aims to predict 15 days of sales for a convenience store using hist
 - Python - Data preparation analysis
 - XGBoost - Model
 
+## Initial EDA
 
-## Data Cleaning and Preparation
+1. Check for null values.
+2. Check data types.
+3. Get summary statistics from datasets.
 
-In this phase the tasks performed were the following:
+## Data Cleaning
 
-1. Review datatypes and fix them.
-2. Use UNION function to merge both datasets into temp table.
-3. Check for null values.
-4. Get the unique values for main fields.
-5. Fix outliers.
-6. Create temp tables to split data.
-7. Create a CTE with a distinct value to use it as primary key.
-8. Join temp tables using CTE to have a long format dataset.
+1. Keep important columns, rename and format columns. 
+2. Formate data column and set it as index.
+3. Merge both dataframes on index.
+
+## Data Preparation (feature engineering)
+
+1. Label encoding
+2. Create user defined functions for:
+   - Basic date-based features.
+   - Lag features.
+   - Rolling average features.
+3. Add all features with functions.
 
 
 ## Exploratory Data Analysis
