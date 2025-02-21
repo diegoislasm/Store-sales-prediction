@@ -1,5 +1,5 @@
 # Store-sales-prediction
-Project to predict sales from a store with past sales, date and weather features from an API.
+Python and machine learning project to predict sales from a store with historical sales and weather data and data-based features from an API.
 
 ## Table of contents
 
@@ -16,7 +16,7 @@ Project to predict sales from a store with past sales, date and weather features
 
 ## Project Overview 
 
-This project shows important insights of the global EV sales data throughout the years, offering data about sales, current number of EVs per country divided by their types (BEV, HEV, PHEV) and charging stations by country and year. The purpose of this is to provide key information about the best EV type investment, best country to invest in EV or charging stations, based on trends and current metrics.
+This project aims to predict 15 days of sales for a convenience store using historical weather data and date-based features, using a weather API and Machine Learning model to help identify trends and understand how external factors, such as temperature, impact sales, assist in future sales.
 
 
 ## Data Source
