@@ -52,23 +52,52 @@ This project aims to predict 15 days of sales for a convenience store using hist
 3. Add all features with functions.
 
 
-## Exploratory Data Analysis
+## Advanced EDA
 
-As part of the EDA I started by finding facts like the overall trending sales, the country with more EV sales, the country with more EVs, the most popular type of EV and more. To do this a combination of functions like GROUP BY, PARTITION BY, conditions, LAG and subqueries were used.
-
-Here are some examples of the code used: 
+-Plot the following to understand the data bettter:
+   - Daily, weekly and monthly sales.
+   - Correlation between sales and weather features.
+   - Sales vs. weather in a scatter plot.
+   - Sales vs weather over time.
 
 ```sql
 
 ```
+## API
 
+1. Set API variables to obtain weather data.
+2. Create functions to get this weather data from the API:
+   - 15 days of weather forecast.
+   - Next 15 days of weather.
+   - Update weather data for new sales data.
 
-## Data Analysis
+## Add new sales
 
+- Function to let the user update new daily sales data.
+
+## Model selection and training
+
+- Train an XGBoost Regressor using TimeSeriesSplit (48 splits, test size = 15, gap = 7).
+
+## Model evaluation
+
+- Use the average of this metrics to evaluate model across folds:
+   - Root Mean Squared Error (RMSE)
+   - Mean Absolute Error (MAE)
+   - Mean Absolute Percentage Error (MAPE)
+   - R² Score
 
 ## Results
 
-The analysis results are summarized as follows:
+The model performance obtained the following results when predicting on test folds:
+
+- Average RMSE: 3867.3485
+- Average MAE: 3004.7112
+- Average MAPE: 9.52%
+- Average r2 Score: 0.2629
+
+When predicting the next 15 days after the last day of the dataset the results were the following:
+
 
 ## Recommendations
 
