@@ -27,8 +27,8 @@ This project aims to predict 15 days of sales for a convenience store using hist
 
 ## Tools
 
-- Python - Data preparation analysis
-- XGBoost - Model
+- Python - Data preparation, cleaning and analysis.
+- XGBoost - Machine Learning model to make predictions.
 
 ## Initial EDA
 
@@ -47,6 +47,7 @@ This project aims to predict 15 days of sales for a convenience store using hist
 - Label encoding
 - Create user defined functions for:
    - Basic date-based features.
+   - Holidays, Sunday and paydays features.
    - Lag features.
    - Rolling average features.
 - Add all features with functions.
@@ -54,19 +55,17 @@ This project aims to predict 15 days of sales for a convenience store using hist
 
 ## Advanced EDA
 
--Plot the following to understand the data bettter:
+- Plot the following to understand the data bettter:
    - Daily, weekly and monthly sales.
    - Correlation between sales and weather features.
    - Sales vs. weather in a scatter plot.
    - Sales vs weather over time.
 
-```sql
 
-```
 ## API
 
 - Set API variables to obtain weather data.
-- Create functions to get this weather data from the API:
+- Create functions to get the following weather data from the API:
    - 15 days of weather forecast.
    - Next 15 days of weather.
    - Update weather data for new sales data.
@@ -77,11 +76,80 @@ This project aims to predict 15 days of sales for a convenience store using hist
 
 ## Model selection and training
 
-- Train an XGBoost Regressor using TimeSeriesSplit (48 splits, test size = 15, gap = 7).
+- Train an XGBoost Regressor using TimeSeriesSplit.
+
+Here is an example of the code used:
+
+```python
+# Split the data for Time Series data
+tss = TimeSeriesSplit(n_splits=48, test_size=15, gap = 7)
+data = data.sort_index()
+
+fold = 0
+preds = []
+rmse_scores = []
+mae_scores = []
+mape_scores = []
+r2_scores = []
+
+for train_idx, val_idx in tss.split(data):
+  train = data.iloc[train_idx]
+  test = data.iloc[val_idx]
+
+  train = add_features(train)
+  test = add_features(test)
+
+  # Define features and target data
+  FEATURES = ['tempmax', 'tempmin', 'temp', 'feelslikemax', 'feelslikemin', 'precip',
+       'precipcover', 'is_rain', 'windgust', 'windspeed', 'weekday', 'week',
+       'day', 'month', 'year', 'day_of_year', 'is_holiday', 'is_sunday',
+       'is_payday', 'is_holiday_1_lag', 'is_holiday_2_lag', 'is_holiday_3_lag',
+       'sales_lag_1', 'sales_lag_7', 'sales_lag_14', 'sales_lag_28',
+       'sales_lag_364', 'sales_rolling_avg_7', 'sales_rolling_avg_14',
+       'sales_rolling_avg_28', 'sales_rolling_avg_364']
+  TARGET = 'sales'
+
+  # Create x and y train and test dataset with features and target
+  x_train = train[FEATURES]
+  y_train = train[TARGET]
+
+  x_test = test[FEATURES]
+  y_test = test[TARGET]
+
+
+  # Tune regressor model
+  reg = xgb.XGBRegressor(base_score=0.5, booster='gbtree',
+                         n_estimators=500,
+                         early_stopping_rounds=50,
+                         objective='reg:linear',
+                         max_depth=3,
+                         learning_rate=0.01)
+
+  # Fit model on train and test sets
+  reg.fit(x_train, y_train,
+          eval_set=[(x_train, y_train), (x_test, y_test)],
+          verbose=100)
+
+  # Predict on test
+  y_pred = reg.predict(x_test)
+  preds.append(y_pred)
+
+  # Calculate metrics
+  rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+  mae = mean_absolute_error(y_test, y_pred)
+  mape = np.mean(np.abs((y_test - y_pred) / y_test)) * 100
+  r2 = r2_score(y_test, y_pred)
+
+  # Store metrics for this fold
+  rmse_scores.append(rmse)
+  mae_scores.append(mae)
+  mape_scores.append(mape)
+  r2_scores.append(r2)
+```
 
 ## Model evaluation
 
-- Use the average of this metrics to evaluate model across folds:
+Use the average of these metrics to evaluate model across folds:
    - Root Mean Squared Error (RMSE)
    - Mean Absolute Error (MAE)
    - Mean Absolute Percentage Error (MAPE)
@@ -98,6 +166,8 @@ The model performance obtained the following results when predicting on test fol
 
 When predicting the next 15 days after the last day of the dataset the results were the following:
 
+<img src="https://github.com/user-attachments/assets/9e07c4f0-2c19-410e-833d-0013087b83cb" height="400">
+
 
 ## Recommendations
 
@@ -105,4 +175,4 @@ Based on the analysis, I recommend the following actions:
 
 ## Limitations
 
-- The oldest sales data available was from October 2020. 
+- The oldest sales data available was from October 2020, having only 4 years of data for training.
