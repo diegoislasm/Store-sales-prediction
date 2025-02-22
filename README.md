@@ -32,24 +32,24 @@ This project aims to predict 15 days of sales for a convenience store using hist
 
 ## Initial EDA
 
-1. Check for null values.
-2. Check data types.
-3. Get summary statistics from datasets.
+- Check for null values.
+- Check data types.
+- Get summary statistics from datasets.
 
 ## Data Cleaning
 
-1. Keep important columns, rename and format columns. 
-2. Formate data column and set it as index.
-3. Merge both dataframes on index.
+- Keep important columns, rename and format columns.
+- Formate data column and set it as index.
+- Merge both dataframes on index.
 
 ## Data Preparation (feature engineering)
 
-1. Label encoding
-2. Create user defined functions for:
+- Label encoding
+- Create user defined functions for:
    - Basic date-based features.
    - Lag features.
    - Rolling average features.
-3. Add all features with functions.
+- Add all features with functions.
 
 
 ## Advanced EDA
@@ -65,8 +65,8 @@ This project aims to predict 15 days of sales for a convenience store using hist
 ```
 ## API
 
-1. Set API variables to obtain weather data.
-2. Create functions to get this weather data from the API:
+- Set API variables to obtain weather data.
+- Create functions to get this weather data from the API:
    - 15 days of weather forecast.
    - Next 15 days of weather.
    - Update weather data for new sales data.
