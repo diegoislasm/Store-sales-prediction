@@ -22,7 +22,7 @@ This project aims to predict 15 days of sales for a convenience store using hist
 ## Data Source
 
 - The [sales data](https://github.com/diegoislasm/Store-sales-prediction/blob/main/store_sales.csv) was obtained through a real convenience store in Mexico City which was treated with multiplicative scaling beforehand to comply with data anonymization.
-- The [historical weather](https://github.com/diegoislasm/Store-sales-prediction/blob/main/weather_mexico_city.csv) data and API was obtained from [Visual Crossing Weather](https://www.visualcrossing.com/). 
+- The [historical weather](https://github.com/diegoislasm/Store-sales-prediction/blob/main/weather_mexico_city.csv) data and API data was obtained from [Visual Crossing Weather](https://www.visualcrossing.com/). 
 
 
 ## Tools
@@ -164,12 +164,23 @@ The model performance obtained the following results when predicting on test fol
 - Average MAPE: 9.52%
 - Average r2 Score: 0.2629
 
-When predicting the next 15 days after the last day of the dataset the results were the following:
+Based on this the model during training was off by by between 3,800 and 3,000 units of sale, or on average 9.52%, being very good numbers. While the r2 value shows that the model explains only 26% of the variance in sales, which is quite low.
 
-<img src="https://github.com/user-attachments/assets/9e07c4f0-2c19-410e-833d-0013087b83cb" height="400">
+When predicting the next 15 days after the last day of the dataset and comparing it to the real sales the results were the following:
 
+<img src="https://github.com/user-attachments/assets/f2ab4967-ecc2-4cc8-ac09-69bdcd3f351a" height="400">
+
+- RMSE: 10519.1949
+- MAE: 8720.7644
+- MAPE: 34.21%
+- r2 Score: -7.7823
+
+The model was off by between 10,500 and 8,700 when predicting the real future, or on average 34.21%, which is not very good. In this case the r2 score was negative which shows that the model is not capturing the actual trend.
 
 ## Recommendations
+
+**For the model:**
+The model performance had good results on average during training but performed poorly when using all data and predicting the future. To improve this hyperparameter tuning, add more weather features and lag features or remove non-important features.
 
 Based on the analysis, I recommend the following actions:
 
