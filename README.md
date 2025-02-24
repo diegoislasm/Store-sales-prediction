@@ -11,6 +11,7 @@ Python and machine learning project to predict sales from a store with historica
 - [Data Preparation](#data-preparation)
 - [Advanced EDA](#advanced-eda)
 - [API](#api)
+- [Add New Sales](#add-new-sales)
 - [Model Selection and Training](#model-selection-and-training)
 - [Predictions Results](#prediction-results)
 - [Recommendations](#recommendations)
@@ -131,11 +132,11 @@ def get_new_weather(df):
   return df
 ```
 
-## Add new sales
+## Add New Sales
 
 - Function to let the user update new daily sales data and add the features to the new data.
 
-## Model selection and training
+## Model Selection and Training
 
 - Train an XGBoost Regressor using TimeSeriesSplit.
 
