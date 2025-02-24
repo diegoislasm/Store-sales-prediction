@@ -12,7 +12,7 @@ Python and machine learning project to predict sales from a store with historica
 - [Advanced EDA](#advanced-eda)
 - [API](#api)
 - [Model Selection and Training](#model-selection-and-training)
-- [Results](#results)
+- [Predictions Results](#prediction-results)
 - [Recommendations](#recommendations)
 - [Limitations](#limitations)
 
@@ -216,7 +216,7 @@ Calculate the average of these metrics to evaluate the model across folds:
    - Mean Absolute Percentage Error (MAPE)
    - r2 Score
 
-## Results
+## Prediction Results
 
 The model performance obtained the following results when predicting on test folds:
 
