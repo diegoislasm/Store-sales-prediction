@@ -1,4 +1,4 @@
-# Store-sales-prediction
+# Forecasting Sales with Machine Learning & Weather Data
 Python and machine learning project to predict sales from a store with historical sales and weather data and data-based features from an API.
 
 ## Table of contents
